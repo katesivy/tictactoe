@@ -24,7 +24,7 @@ title.className = "text-center display-4";
 // create button
 var button = document.createElement("div");
     button.setAttribute = ('id', 'footer');
-    button.className = "col-sm-2 text-center p-5 color-white bg-secondary border-dark";
+    button.className = "col-sm-12 text-center p-4 color-white bg-secondary border-dark";
     button.innerHTML = "";
     footer.appendChild(button);
     button.addEventListener('click', restart);
@@ -37,13 +37,14 @@ function createGrid() {
     for (var i = 0; i < 3; i++) {
         var row = document.createElement("div");
         row.setAttribute('id', 'row' + i);
-        row.className = "row mx-lg-n5 mx-sm-2";
+        row.className = "row";
+        // mx-lg-n5 mx-sm-2";
         for (var j = 0; j < 3; j++) {
             var col = document.createElement("div");
             col.setAttribute('id', k);
             // set up click event for squares
             col.addEventListener('click', clickSquare);
-            col.className = "col-4  text-center px-lg-5 mx-sm-2 p-5 border border-dark bg-light color-primary";
+            col.className = "col-sm-4 col-lg-1   text-center p-4 border border-dark bg-light color-primary";
             row.appendChild(col);
             k++;
         }
@@ -83,9 +84,10 @@ function showMessage(str) {
 // function to remove event listener
 function removeListener() {
     for (let i = 0; i < clickData.length; i++) {
-        var square = clickData[i];
-        if (square === 0) {
-            square.removeEventListener('click', restart);
+        var valueOfSquare = clickData[i];
+        if (valueOfSquare === 0) {
+            var s = document.getElementById(i);
+            s.removeEventListener('click', clickSquare);
         }
     }
 }
@@ -116,13 +118,13 @@ function checkWin() {
         // message //restart();
         showMessage("Player " + players[win] + " Won!");
         // call function to remove event listener
-        removeListener;
+        removeListener();
     } else {
         if (clicks == 9) {
             // message: ("tie");  //restart();
             showMessage("You tied! Click here to restart.");
             // call function to remove event listener
-            removeListener;
+            removeListener();
         }
     }
 }
