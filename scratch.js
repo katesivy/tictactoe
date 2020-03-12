@@ -25,6 +25,17 @@ moreCols.className = "col-3 bg-success";
 moreRows.appendChild(moreCols);
 containerNew.appendChild(moreRows);
 
+// var containerNew = document.createElement('div');
+// containerNew.setAttribute('id', 'containerNew');
+// containerNew.className = 'container';
+// var moreRows = document.createElement("div");
+// moreRows.className = 'row';
+// var moreCols = document.createElement("div");
+// moreCols.setAttribute('class', 'col');
+// moreCols.className = "col-3 bg-success";
+// moreRows.appendChild(moreCols);
+// containerNew.appendChild(moreRows);
+// containerNew.appendChild(grid);
 // create Grid
 let x = 3;
 function createGrid() {

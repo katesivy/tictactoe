@@ -21,35 +21,29 @@ header.appendChild(title);
 title.textContent = "Tic-Tac-Toe";
 title.className = "text-center display-4";
 
+// create button
+var button = document.createElement("div");
+    button.setAttribute = ('id', 'footer');
+    button.className = "col-sm-2 text-center p-5 color-white bg-secondary border-dark";
+    button.innerHTML = "";
+    footer.appendChild(button);
+    button.addEventListener('click', restart);
+
 var grid = document.getElementById("grid");
 // create Grid
 
-
-// var containerNew = document.createElement('div');
-// containerNew.setAttribute('id', 'containerNew');
-// containerNew.className = 'container';
-// var moreRows = document.createElement("div");
-// moreRows.className = 'row';
-// var moreCols = document.createElement("div");
-// moreCols.setAttribute('class', 'col');
-// moreCols.className = "col-3 bg-success";
-// moreRows.appendChild(moreCols);
-// containerNew.appendChild(moreRows);
-// containerNew.appendChild(grid);
-
 function createGrid() {
-
     var k = 0;
     for (var i = 0; i < 3; i++) {
         var row = document.createElement("div");
         row.setAttribute('id', 'row' + i);
-        row.className = "row";
+        row.className = "row mx-lg-n5 mx-sm-2";
         for (var j = 0; j < 3; j++) {
             var col = document.createElement("div");
             col.setAttribute('id', k);
             // set up click event for squares
             col.addEventListener('click', clickSquare);
-            col.className = "col-4 text-center p-1 h-75 border border-dark bg-light color-primary";
+            col.className = "col-4  text-center px-lg-5 mx-sm-2 p-5 border border-dark bg-light color-primary";
             row.appendChild(col);
             k++;
         }
@@ -69,24 +63,31 @@ function clickSquare(e) {
     //check for win
     checkWin();
 }
+
 // set restart button (onclick, clear input on cols), (onclick, display player X/O button)
 function restart() {
     clickData = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     clicks = 0;
     turn = 0;
     grid.innerHTML = "";
+    button.textContent = "";
     createGrid();
-    
+
 }
 
-//button function w/ message and restart button
-// set up button
-    // var button = document.createElement("div");
-    // button.className = "button col-sm-2 text-center p-5 border border-dark";
-    // div.appendChild(button);
+//button functions w/ message and restart button
 
-function showRemediation(str){
-
+function showMessage(str) {
+    button.textContent = str;
+}
+// function to remove event listener
+function removeListener() {
+    for (let i = 0; i < clickData.length; i++) {
+        var square = clickData[i];
+        if (square === 0) {
+            square.removeEventListener('click', restart);
+        }
+    }
 }
 
 function checkWin() {
@@ -112,22 +113,19 @@ function checkWin() {
         }
     }
     if (win) {
-        // message
-        showRemediation("Player " + players[win] + " Won!");
-        //restart();
-        break;
+        // message //restart();
+        showMessage("Player " + players[win] + " Won!");
+        // call function to remove event listener
+        removeListener;
     } else {
         if (clicks == 9) {
-            // message: ("tie");
-            showRemediation("The game ended in a tie.  Restart?");
-            //restart();
+            // message: ("tie");  //restart();
+            showMessage("You tied! Click here to restart.");
+            // call function to remove event listener
+            removeListener;
         }
     }
 }
-
-
-
-
 
 createGrid();
 
