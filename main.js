@@ -1,16 +1,3 @@
-// set up Object with container, row, columns, class, id, text
-
-const container = document.createElement("div");
-container.className = "container";
-const row = document.createElement("div");
-row.className = "row";
-const col = document.createElement("div");
-col.className = "col";
-
-// const x = "X";
-// const o = "O";
-// State
-
 var clickData = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // 0 =  nothing clicked, 1 = X, 2 = 0
 var turn = 0;
 var winConditions = [
@@ -21,7 +8,7 @@ var winConditions = [
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [6, 4, 2]
+    [2, 4, 6]
 ];
 
 var clicks = 0;
@@ -34,9 +21,24 @@ header.appendChild(title);
 title.textContent = "Tic-Tac-Toe";
 title.className = "text-center display-4";
 
+var grid = document.getElementById("grid");
 // create Grid
 
+
+// var containerNew = document.createElement('div');
+// containerNew.setAttribute('id', 'containerNew');
+// containerNew.className = 'container';
+// var moreRows = document.createElement("div");
+// moreRows.className = 'row';
+// var moreCols = document.createElement("div");
+// moreCols.setAttribute('class', 'col');
+// moreCols.className = "col-3 bg-success";
+// moreRows.appendChild(moreCols);
+// containerNew.appendChild(moreRows);
+// containerNew.appendChild(grid);
+
 function createGrid() {
+
     var k = 0;
     for (var i = 0; i < 3; i++) {
         var row = document.createElement("div");
@@ -47,38 +49,48 @@ function createGrid() {
             col.setAttribute('id', k);
             // set up click event for squares
             col.addEventListener('click', clickSquare);
-            col.className = "tics col-sm-2 text-center p-5 border border-dark";
+            col.className = "col-4 text-center p-1 h-75 border border-dark bg-light color-primary";
             row.appendChild(col);
             k++;
         }
-        var container = document.getElementsByClassName("container")[0];
-        container.appendChild(row);
+        grid.appendChild(row);
     }
 }
 
 function clickSquare(e) {
-
     // set state
-    clickData[this.id] = Number(turn) + 1; // 0, 1 - 1,2
+    clickData[this.id] = Number(turn) + 1; // 0, 1 -> 1,2
     // update view when clicked 
-
     document.getElementById(this.id).innerHTML = players[Number(turn) + 1];
-
     turn = !turn;
     // remove click handler for square 
-    // ((set variable)this.id.removeEventListener('click', clickSquare);
     this.removeEventListener('click', clickSquare);
     clicks++;
     //check for win
-    // how do i tell which square has been clicked and with an o or x?
     checkWin();
+}
+// set restart button (onclick, clear input on cols), (onclick, display player X/O button)
+function restart() {
+    clickData = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    clicks = 0;
+    turn = 0;
+    grid.innerHTML = "";
+    createGrid();
+    
+}
+
+//button function w/ message and restart button
+// set up button
+    // var button = document.createElement("div");
+    // button.className = "button col-sm-2 text-center p-5 border border-dark";
+    // div.appendChild(button);
+
+function showRemediation(str){
 
 }
 
-
 function checkWin() {
     var win = 0;
-    // loop thru the winconditions
     for (let i = 0; i < winConditions.length; i++) {
         var total = 0;
         for (let j = 0; j < winConditions[i].length; j++) {
@@ -98,23 +110,25 @@ function checkWin() {
                 }
             }
         }
-        if (win) {
-            alert(players[win] + " won");
-            break;
-        } else {
-            if (clicks == 9) {
-                alert("tie");
-            }
+    }
+    if (win) {
+        // message
+        showRemediation("Player " + players[win] + " Won!");
+        //restart();
+        break;
+    } else {
+        if (clicks == 9) {
+            // message: ("tie");
+            showRemediation("The game ended in a tie.  Restart?");
+            //restart();
         }
     }
 }
 
 
-// set up function to check if win or draw/display message
 
-// set restart button (onclick, clear input on cols), (onclick, display player X/O button)
 
-// call functions
+
 createGrid();
 
 

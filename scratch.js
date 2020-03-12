@@ -15,6 +15,15 @@ begin.className = "col-12 text-center display-5 border border-primary btn-primar
 // begin.addEventListener('click', function() {
 //      document.innerHTML  ;
 // }
+containerNew.appendChild(app);
+containerNew.setAttribute('id', 'containerNew');
+var moreRows = document.createElement("row");
+moreRows.setAttribute('id', 'row');
+var moreCols = document.createElement("col");
+moreCols.setAttribute('id', 'col');
+moreCols.className = "col-3 bg-success";
+moreRows.appendChild(moreCols);
+containerNew.appendChild(moreRows);
 
 // create Grid
 let x = 3;
@@ -43,5 +52,29 @@ function createGrid() {
 createGrid();
 
 
+// attempt #2
+
+const page = document.getElementById("body");
+document.createElement(div);
+
+class Build {
+    constructor(elementType, class, ID, textContent) {
+        this.elementType = document.createElement;
+        this.class = document.getElementByClassName;
+        this.Id = getElementById;
+        this.textContent = document.innerHTML;
+        return element;
+    }
+}
 
 
+Build.call(this, div, row, container) {  
+    for (var rows = 0; rows < x; rows++) {
+                // row.innerHTML=1 + rows;
+        for (var columns = 0; columns < x; columns++) {
+            var col = document.createElement("div");
+            col.innerHTML=1 + columns;   
+            
+            row.appendChild(col);
+            col.className = "col-sm-2 text-center p-5 border border-dark ";
+            // console.log(col);
