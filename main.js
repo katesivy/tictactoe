@@ -44,7 +44,7 @@ function createGrid() {
             col.setAttribute('id', k);
             // set up click event for squares
             col.addEventListener('click', clickSquare);
-            col.className = "col-sm-4 col-lg-1   text-center p-4 border border-dark bg-light color-primary";
+            col.className = "col-sm-4   text-center p-4 border border-dark bg-light color-primary";
             row.appendChild(col);
             k++;
         }
